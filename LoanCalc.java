@@ -43,14 +43,12 @@ public class LoanCalc {
     public static double bruteForceSolver(double loan, double rate, int n, double epsilon) {
 		double payment = loan/n;
 		iterationCounter =0;
-		while (Math.abs(endBalance(loan, rate, n, payment))>epsilon) {
-			if (endBalance(loan, rate, n, payment)>0){
-			payment= payment+epsilon;
-			}
-			iterationCounter++;
+    	while (endBalance(loan, rate, n, payment) > 0.0 && iterationCounter < 1_000_000) {
+        	payment += epsilon;
+        	iterationCounter++;
 		}
-		return payment;
-    }
+    		return payment;
+	}
     
     // Uses bisection search to compute an approximation of the periodical payment 
 	// that will bring the ending balance of a loan close to 0.
